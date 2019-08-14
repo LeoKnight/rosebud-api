@@ -4,14 +4,21 @@ import { Repository, getConnection } from 'typeorm';
 import { User } from './user.entity';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(
     @InjectRepository(User)
-    private readonly UserRepository: Repository<User>,
+    private readonly UsersRepository: Repository<User>,
   ) { }
 
   async findAll(): Promise<User[]> {
-    return await this.UserRepository.find();
+    return await this.UsersRepository.find();
+  }
+
+  async findOne(id: string): Promise<User | undefined> {
+    return await getConnection()
+    .createQueryBuilder()
+    .where('user.id = :id', {id})
+    .execute();
   }
 
   async insert(body): Promise<any> {

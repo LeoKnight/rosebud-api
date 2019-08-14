@@ -6,6 +6,7 @@ enum Sex {
   OTHER = 'OTHER',
   UNKOWN = 'UNKOWN',
 }
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -13,6 +14,9 @@ export class User {
 
   @Column({ length: 500 })
   name: string;
+
+  @Column({ length: 20 })
+  password: string;
 
   @Column(
     {
