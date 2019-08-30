@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
-enum cryptoType {
+export enum cryptoType {
   decode = 'decode',
   encode = 'encode',
 }
 
-enum unicodeType {
+export enum unicodeType {
   utf8 = 'utf8',
   ascii = 'ascii',
 }

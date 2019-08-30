@@ -1,7 +1,7 @@
 import { Controller, Get, Query, Param } from '@nestjs/common';
-import { CryptoService } from './crypto.service';
+import { unicodeType, cryptoType, CryptoService } from './crypto.service';
 
-@Controller('crypto')
+@Controller('api/crypto')
 export class CryptoController {
   constructor(private readonly cryptoService: CryptoService) { }
 
@@ -9,7 +9,22 @@ export class CryptoController {
   encodeBase64(
     @Param() params,
   ) {
-    return params.value;
+    return this.cryptoService.base64({
+      type: cryptoType.encode,
+      unicode: unicodeType.utf8,
+      value: params.value,
+    });
+  }
+
+  @Get('base63/decode/:value')
+  decodeBase64(
+    @Param() params,
+  ) {
+    return this.cryptoService.base64({
+      type: cryptoType.decode,
+      unicode: unicodeType.utf8,
+      value: params.value,
+    });
   }
 
 }
