@@ -5,7 +5,7 @@ import { unicodeType, cryptoType, CryptoService } from './crypto.service';
 export class CryptoController {
   constructor(private readonly cryptoService: CryptoService) { }
 
-  @Get('base63/encode/:value')
+  @Get('base64/encode/:value')
   encodeBase64(
     @Param() params,
   ) {
@@ -16,7 +16,7 @@ export class CryptoController {
     });
   }
 
-  @Get('base63/decode/:value')
+  @Get('base64/decode/:value')
   decodeBase64(
     @Param() params,
   ) {
