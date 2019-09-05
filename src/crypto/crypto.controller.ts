@@ -1,7 +1,7 @@
 import { Controller, Get, Query, Param } from '@nestjs/common';
 import { unicodeType, cryptoType, CryptoService } from './crypto.service';
 
-@Controller('api/crypto')
+@Controller('crypto')
 export class CryptoController {
   constructor(private readonly cryptoService: CryptoService) { }
 
