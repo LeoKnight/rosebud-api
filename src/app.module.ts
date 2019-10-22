@@ -14,9 +14,9 @@ import { join } from 'path';
   imports: [
     // TypeOrmModule.forRoot(),
     CareerModule,
+    AuthModule,
     UsersModule,
     // GqlModule,
-    // AuthModule,
     CryptoModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -24,7 +24,7 @@ import { join } from 'path';
       port: 3306,
       username: 'root',
       password: '123',
-      database: 'test',
+      database: 'rosebud',
       entities: [join(__dirname, '**/**.entity{.ts,.js}')],
       synchronize: true,
     }),
