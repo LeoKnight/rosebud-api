@@ -14,12 +14,21 @@ export class UsersService {
     return await this.UsersRepository.find();
   }
 
-  async findOne(id: string): Promise<User | undefined> {
+  async findUserByName(name: string): Promise<User | undefined> {
+    const target = await this.UsersRepository.
+    createQueryBuilder("user")
+    .where('user.name = :name', {name})
+    .getOne();
+    return target
+  }
+
+  async findUserById(id: string): Promise<User | undefined> {
     return await getConnection()
     .createQueryBuilder()
     .where('user.id = :id', {id})
     .execute();
   }
+
 
   async insert(body): Promise<any> {
 

@@ -3,7 +3,7 @@
 ## doc
 
 <https://typeorm.io/#/entities>
-<https://docs.nestjs.com/controllers>
+<https://docs.nestjs.com/>
 
 ### 新建module
 
