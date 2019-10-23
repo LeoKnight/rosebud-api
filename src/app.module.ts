@@ -8,7 +8,8 @@ import { GqlModule } from './gql/gql.module';
 import { AuthModule } from './auth/auth.module';
 import { CryptoModule } from './crypto/crypto.module';
 import { join } from 'path';
-
+require('dotenv').config()
+console.log(process.env)
 
 @Module({
   imports: [
