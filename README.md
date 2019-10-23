@@ -1,5 +1,12 @@
 # rosebud-api
 
+## 开发环境搭建
+mysql <= 5.7
+推荐使用docker
+```shell
+sudo docker run --name my-sql -v ~/db/mysql:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=123 -p 3306:3306 -d mysql:5.7
+```
 ## doc
 
 <https://typeorm.io/#/entities>

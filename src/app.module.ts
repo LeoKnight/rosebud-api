@@ -9,8 +9,14 @@ import { AuthModule } from './auth/auth.module';
 import { CryptoModule } from './crypto/crypto.module';
 import { join } from 'path';
 require('dotenv').config()
-console.log(process.env)
 
+const { 
+  MYSQL_PORT,
+  MYSQL_HOST,
+  MYSQL_USER_NAME,
+  MYSQL_PASSWORD,
+  MYSQL_DATABASE
+} = process.env
 @Module({
   imports: [
     // TypeOrmModule.forRoot(),
@@ -21,11 +27,11 @@ console.log(process.env)
     CryptoModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '123',
-      database: 'rosebud',
+      host: MYSQL_HOST,
+      port: +MYSQL_PORT,
+      username: MYSQL_USER_NAME,
+      password: MYSQL_PASSWORD,
+      database: MYSQL_DATABASE,
       entities: [join(__dirname, '**/**.entity{.ts,.js}')],
       synchronize: true,
     }),
