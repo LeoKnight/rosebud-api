@@ -1,0 +1,20 @@
+type Query {
+  getDiscuss: [Discuss]
+  discuss(id: ID!): Discuss
+}
+
+type Mutation {
+  createDiscuss(createDiscussInput: CreateDiscussInput): Discuss
+}
+
+type Discuss {
+  id: Int
+  content: String
+  articleId: String
+  reply: [Discuss]
+}
+
+input CreateDiscussInput {
+  content: String
+  articleId: String
+}

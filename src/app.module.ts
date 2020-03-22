@@ -4,26 +4,24 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CareerModule } from './career/career.module';
 import { UsersModule } from './users/users.module';
-import { GqlModule } from './gql/gql.module';
 import { AuthModule } from './auth/auth.module';
 import { CryptoModule } from './crypto/crypto.module';
 import { join } from 'path';
+import { DiscussModule } from './discuss/discuss.module';
 require('dotenv').config()
 
 const { 
-  MYSQL_PORT,
-  MYSQL_HOST,
-  MYSQL_USER_NAME,
+  MYSQL_PORT=3306,
+  MYSQL_HOST="localhost",
+  MYSQL_USER_NAME="root",
   MYSQL_PASSWORD,
   MYSQL_DATABASE
 } = process.env
 @Module({
   imports: [
-    // TypeOrmModule.forRoot(),
     CareerModule,
     AuthModule,
     UsersModule,
-    // GqlModule,
     CryptoModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -35,6 +33,7 @@ const {
       entities: [join(__dirname, '**/**.entity{.ts,.js}')],
       synchronize: true,
     }),
+    DiscussModule,
   ],
   controllers: [AppController],
   providers: [AppService],
