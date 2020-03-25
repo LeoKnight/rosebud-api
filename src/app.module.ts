@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { CryptoModule } from './crypto/crypto.module';
 import { join } from 'path';
 import { DiscussModule } from './discuss/discuss.module';
+import { GraphQLModule } from '@nestjs/graphql';
 require('dotenv').config()
 
 const { 
@@ -34,6 +35,10 @@ const {
       synchronize: true,
     }),
     DiscussModule,
+    GraphQLModule.forRoot({
+      typePaths: ['./**/*.graphql'],
+      installSubscriptionHandlers: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
