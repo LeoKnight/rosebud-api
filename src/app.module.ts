@@ -9,6 +9,7 @@ import { CryptoModule } from './crypto/crypto.module';
 import { join } from 'path';
 import { DiscussModule } from './discuss/discuss.module';
 import { GraphQLModule } from '@nestjs/graphql';
+import { DateScalar } from './common/scalars/date.scalar';
 require('dotenv').config()
 
 const { 
@@ -20,10 +21,6 @@ const {
 } = process.env
 @Module({
   imports: [
-    CareerModule,
-    AuthModule,
-    UsersModule,
-    CryptoModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: MYSQL_HOST,
@@ -34,6 +31,10 @@ const {
       entities: [join(__dirname, '**/**.entity{.ts,.js}')],
       synchronize: true,
     }),
+    CareerModule,
+    AuthModule,
+    UsersModule,
+    CryptoModule,
     DiscussModule,
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
@@ -41,6 +42,7 @@ const {
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,DateScalar],
+  
 })
 export class AppModule {}

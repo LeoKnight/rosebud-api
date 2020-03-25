@@ -13,7 +13,7 @@ export class DiscussResolver {
 
     @Query()
     @UseGuards(DiscussGuard)
-    async getCats() {
+    async getDiscuss() {
         return await this.discussService.findAll();
     }
 
@@ -29,5 +29,11 @@ export class DiscussResolver {
     async create(@Args('createDiscussInput') args: CreateDiscussDto): Promise<Discuss> {
         const createdDiscuss = await this.discussService.create(args);
         return createdDiscuss;
+    }
+
+    @Mutation('reply')
+    async reply(@Args('createDiscussInput') args: CreateDiscussDto, @Args('id') id: number): Promise<Discuss> {
+        const updatedDiscuss = await this.discussService.reply(args,id);
+        return updatedDiscuss;
     }
 }

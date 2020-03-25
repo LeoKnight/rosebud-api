@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, VersionColumn } from 'typeorm';
 
 @Entity()
 export class Discuss {
@@ -11,7 +11,18 @@ export class Discuss {
   @Column('text')
   articleId: string;
 
-  @Column("simple-array")
+  @Column({
+    type:"simple-array",
+  })
   reply: string[];
+
+  @CreateDateColumn()
+  createTime: Date;
+
+  @UpdateDateColumn()
+  updateTime: Date;
+
+  @VersionColumn()
+  version: number;
 
 }

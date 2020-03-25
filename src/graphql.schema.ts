@@ -11,14 +11,18 @@ export class CreateDiscussInput {
 }
 
 export class Discuss {
-    id?: number;
+    id?: string;
     content?: string;
     articleId?: string;
+    createTime?: Date;
+    updateTime?: Date;
     reply?: Discuss[];
 }
 
 export abstract class IMutation {
     abstract createDiscuss(createDiscussInput?: CreateDiscussInput): Discuss | Promise<Discuss>;
+
+    abstract reply(id: string, createDiscussInput?: CreateDiscussInput): Discuss | Promise<Discuss>;
 }
 
 export abstract class IQuery {

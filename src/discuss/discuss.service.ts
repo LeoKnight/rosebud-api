@@ -15,8 +15,20 @@ export class DiscussService {
     const discuss = new Discuss();
     discuss.content = createDiscussInput.content;
     discuss.articleId = createDiscussInput.articleId;
+    discuss.reply=[]
 
     return this.discussRepository.save(discuss);
+  }
+
+  async reply(createDiscussInput: CreateDiscussDto, id: number): Promise<Discuss>  {
+    const commit = await this.create(createDiscussInput)
+    const result = await this.discussRepository.findOne(id);
+    const discuss = new Discuss();
+    Object.assign(discuss,result);
+    discuss.reply.push(commit.id.toString());
+    const updateResult = await this.discussRepository.update(result.id,discuss);
+    console.log(updateResult)
+    return discuss;
   }
 
   async findAll(): Promise<Discuss[]> {

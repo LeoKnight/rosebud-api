@@ -2,15 +2,19 @@ type Query {
   getDiscuss: [Discuss]
   discuss(id: ID!): Discuss
 }
+scalar Date
 
 type Mutation {
   createDiscuss(createDiscussInput: CreateDiscussInput): Discuss
+  reply( id: ID!,createDiscussInput: CreateDiscussInput): Discuss
 }
 
 type Discuss {
-  id: Int
+  id: String
   content: String
   articleId: String
+  createTime: Date
+  updateTime: Date
   reply: [Discuss]
 }
 
