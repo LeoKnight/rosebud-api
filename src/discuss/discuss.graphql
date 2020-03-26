@@ -10,15 +10,23 @@ type Mutation {
 }
 
 type Discuss {
-  id: String
-  content: String
+  id: ID
   articleId: String
+  replyId: ID
+  reply: [ID]
+  replyEtities: [Discuss]
+  isHtml: Boolean
+  deleted: Boolean
+  content: String
   createTime: Date
   updateTime: Date
-  reply: [Discuss]
+  
 }
 
 input CreateDiscussInput {
   content: String
   articleId: String
+  replyId: ID
+  isHtml: Boolean
+  deleted: Boolean
 }

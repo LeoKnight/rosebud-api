@@ -8,15 +8,22 @@
 export class CreateDiscussInput {
     content?: string;
     articleId?: string;
+    replyId?: string;
+    isHtml?: boolean;
+    deleted?: boolean;
 }
 
 export class Discuss {
     id?: string;
-    content?: string;
     articleId?: string;
+    replyId?: string;
+    reply?: string[];
+    replyEtities?: Discuss[];
+    isHtml?: boolean;
+    deleted?: boolean;
+    content?: string;
     createTime?: Date;
     updateTime?: Date;
-    reply?: Discuss[];
 }
 
 export abstract class IMutation {

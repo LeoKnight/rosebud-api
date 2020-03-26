@@ -3,7 +3,13 @@ import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 @Entity()
 export class Discuss {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
+
+  @Column({
+    type:'text',
+    nullable:true
+  })
+  replyId: string
 
   @Column({ length: 5000 })
   content: string;
@@ -15,6 +21,20 @@ export class Discuss {
     type:"simple-array",
   })
   reply: string[];
+
+  replyEtities: Discuss[]
+
+  @Column({
+    type:"bit",
+    default:false
+  })
+  isHtml: Boolean;
+
+  @Column({
+    type:"bit",
+    default:false
+  })
+  deleted: Boolean;
 
   @CreateDateColumn()
   createTime: Date;
