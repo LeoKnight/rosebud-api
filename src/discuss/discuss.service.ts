@@ -26,20 +26,22 @@ export class DiscussService {
   }
 
   async reply(createDiscussInput: CreateDiscussDto, id: number): Promise<Discuss>  {
-    const commit = await this.create(createDiscussInput)
-    const result = await this.discussRepository.findOne(id);
+    
+    const replyedDiscuss = await this.discussRepository.findOne(id);
+    if(!replyedDiscuss){
+      throw new Error(`未找到该数据：${id}`)
+    }
+    const reply = await this.create(createDiscussInput)
     const discuss = new Discuss();
-    Object.assign(discuss,result);
-    discuss.reply.push(commit.id);
+    discuss.reply.push(reply.id);
     const updateResult = await this.discussRepository.update(id,discuss);
-    console.log(updateResult)
-    return discuss;
+    return reply;
   }
 
   async findAll(): Promise<Discuss[]> {
     const allDiscuss = await this.discussRepository.find();
     const result = await Promise.all(allDiscuss.map(async (discuss)=>{
-      if(discuss.reply.length>0){
+      if(discuss && discuss.reply.length>0){
         const {reply}=discuss;
         discuss.replyEtities = await this.discussRepository.findByIds(reply);
       }
@@ -52,7 +54,7 @@ export class DiscussService {
 
   async findOne(id: string): Promise<Discuss> {
     const discuss = await this.discussRepository.findOne(id);
-    if(discuss.reply.length>0){
+    if(discuss && discuss.reply.length>0){
       const {reply}=discuss;
       discuss.replyEtities = await this.discussRepository.findByIds(reply);
     }
